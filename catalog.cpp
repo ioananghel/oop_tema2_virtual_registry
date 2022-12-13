@@ -1,5 +1,6 @@
 #include <memory>
 #include "catalog.h"
+#include "no_student.h"
 
 std :: vector <std :: shared_ptr<Person>> Catalog :: registry;
 
@@ -17,6 +18,8 @@ std::shared_ptr<Person> Catalog::findStudentByCNP(const std::string cnp)
             return it;
         }
     }
+
+    throw(NoSuchStudent());
 
     return std::shared_ptr<Person>();
     ///throw NoSuchStudent();

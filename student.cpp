@@ -2,6 +2,7 @@
 #include <vector>
 #include "person.h"
 #include "student.h"
+#include "no_grades.h"
 
 Student::Student(const std :: string &lastName, const std :: string &firstName, const std :: string &cnp, const std :: string &registrationNumber, char sex) :
     Person(lastName, firstName, cnp, registrationNumber, sex)
@@ -21,6 +22,11 @@ void Student::setGrades(const std::vector<int> &grades)
 
 const std::vector<int> &Student::getGrades() const
 {
+    if(grades.empty())
+    {
+        throw(NoGrades());
+    }
+
     return grades;
 }
 
