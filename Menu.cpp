@@ -2,10 +2,10 @@
 
 void logged_in(std :: shared_ptr<Student> stud)
 {
-    std :: cout << "hai cu tataa" << stud -> getLastName();
+    std :: cout << "\nBine ai venit, " << stud -> getLastName() << "\n";
     while(true)
     {
-        std :: cout << "Alegeti o actiune:\n1.Vizualizare note\n2.Exit";
+        std :: cout << "\nAlegeti o actiune:\n1.Vizualizare note\n2.Exit";
         int action;
         fflush(stdin);
 
@@ -36,7 +36,7 @@ void logged_in(std :: shared_ptr<Student> stud)
             }
             default:
             {
-                std :: cout << "Alegeti o varianta din lista";
+                std :: cout << "\nAlegeti o varianta din lista\n";
                 break;
             }
         }
@@ -46,11 +46,11 @@ void logged_in(std :: shared_ptr<Student> stud)
 void Menu ::Start()
 {
     int stud_nr;
-    std :: cout << "Introduceti numarul de studenti: ";
+    std :: cout << "\nIntroduceti numarul de studenti: ";
     fflush(stdin);
     std :: cin >> stud_nr;
 
-    std :: cout << "================CATALOG VIRTUAL================\n";
+    std :: cout << "\n================CATALOG VIRTUAL================\n";
 
     while(true)
     {
@@ -72,10 +72,10 @@ void Menu ::Start()
 
                 if(buff_user == "Admin01" && buff_pass == "Admin01pa55")
                 {
-                    std :: cout << "\nBine ai venit, Admin01! ";
+                    std :: cout << "\nBine ai venit, Admin01! \n";
                     while(true)
                     {
-                        std::cout << "Ce actiune ai dori sa urmezi:\n1. Adaugare student;\n2. Adaugare Note;\n3. Vizualizare Note;\n4. Exit;" << std::endl;
+                        std::cout << "\nCe actiune ai dori sa urmezi:\n1. Adaugare student;\n2. Adaugare Note;\n3. Vizualizare Note;\n4. Exit;" << std::endl;
 
                         int action;
                         std::cin >> action;
@@ -84,7 +84,7 @@ void Menu ::Start()
                         {
                             case 1:
                             {
-                                std::cout << "Introduceti urmatoarele date:\n";
+                                std::cout << "\nIntroduceti urmatoarele date:\n";
                                 std::string buff_last_name, buff_first_name, buff_cnp, buff_reg_nr;
                                 char buff_sex;
                                 std::cout << "Nume: ";
@@ -113,7 +113,7 @@ void Menu ::Start()
                             }
                             case 2:
                             {
-                                std :: cout << "Introduceti CNP-ul studentului caruia doriti sa ii aplicati modificarile: ";
+                                std :: cout << "\nIntroduceti CNP-ul studentului caruia doriti sa ii aplicati modificarile: ";
                                 fflush(stdin);
 
                                 std :: string buff_cnp;
@@ -122,7 +122,7 @@ void Menu ::Start()
                                 std :: shared_ptr<Person> pers = Catalog ::findStudentByCNP(buff_cnp);
                                 std :: shared_ptr<Student> stud = std ::dynamic_pointer_cast<Student>(pers);
 
-                                std :: cout << "Introduceti numarul de note si acestea: ";
+                                std :: cout << "\nIntroduceti numarul de note si acestea: \n";
                                 fflush(stdin);
 
                                 int n;
@@ -139,17 +139,11 @@ void Menu ::Start()
 
                                 stud -> setGrades(v);
 
-//                                v = stud -> getGrades();
-//
-//                                for(auto it : v)
-//                                {
-//                                    std :: cout  << it;
-//                                }
                                 break;
                             }
                             case 3:
                             {
-                                std :: cout << "Introduceti CNP-ul studentului pentru care doriti sa vizualizati notele: ";
+                                std :: cout << "\nIntroduceti CNP-ul studentului pentru care doriti sa vizualizati notele: ";
                                 fflush(stdin);
 
                                 std :: string buff_cnp;
@@ -179,16 +173,15 @@ void Menu ::Start()
                 {
                     std::shared_ptr<Person> pers = Catalog::findAccountByUser(buff_user);
                     std::shared_ptr<Account> acc = std::dynamic_pointer_cast<Account>(pers);
-                    std::cout << "\nacc cnp: " << acc->getCnp();
+//                    std::cout << "\nacc cnp: " << acc->getCnp();
 
                     if (acc->getPasswd() == buff_pass) {
-                        pers = Catalog::findStudentByCNP(acc->getCnp());
-                        std::shared_ptr<Student> stud = std::dynamic_pointer_cast<Student>(pers);
-
                         try
                         {
+                            pers = Catalog::findStudentByCNP(acc->getCnp());
+                            std::shared_ptr<Student> stud = std::dynamic_pointer_cast<Student>(pers);
                             std :: string buff_cnp = stud ->getCnp();
-                            std::cout << "\nstud cnp" << stud->getCnp() << "\n";
+//                            std::cout << "\nstud cnp" << stud->getCnp() << "\n";
                             logged_in(stud);
                         }
                         catch(const NoSuchStudent &err)
@@ -202,7 +195,7 @@ void Menu ::Start()
             }
             case 2:
             {
-                std :: cout << "Buna ziua! Pentru a va creea un cont, introduceti va rog urmatoarele date:\n";
+                std :: cout << "\nBuna ziua! Pentru a va creea un cont, introduceti va rog urmatoarele date:\n";
                 std :: string buff_last_name, buff_first_name;
                 std :: cout << "Nume: ";
                 fflush(stdin);
@@ -234,18 +227,15 @@ void Menu ::Start()
                 auto temp_acc = std ::make_shared<Account>(buff_last_name, buff_first_name, buff_cnp, buff_registration_number, buff_sex, buff_user, buff_passwd);
                 Catalog :: AddPerson(temp_acc);
                 break;
-
-//                std :: shared_ptr<Person> yep = Catalog ::findAccountByUser("ioan");
-//                std :: cout << yep -> getCnp();
-//                std :: shared_ptr<Account> p = std::dynamic_pointer_cast<Account>(yep);
-//                std :: cout << p ->getPasswd();
             }
             case 3:
             {
                 return;
             }
             default:
-                std :: cout << "Alegeti una dintre optiunile afisate!";
+                std :: cout << "\nAlegeti una dintre optiunile afisate!\n";
+                fflush(stdin);
+                break;
         }
     }
 }
