@@ -7,5 +7,5 @@ void NoGrades::Print(std::ostream &os) const
 
 const char *NoGrades::what() const noexcept
 {
-    return "No grades registered to this student";
+    return "\nNo grades registered to this student\n";
 }

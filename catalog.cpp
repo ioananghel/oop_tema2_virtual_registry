@@ -41,3 +41,20 @@ std::shared_ptr<Person> Catalog::findAccountByUser(const std::string username)
 
     return std::shared_ptr<Person>();
 }
+
+std :: shared_ptr<Person> Catalog ::findAccountByCNP(const std::string cnp)
+{
+    for(auto &it : Catalog :: registry)
+    {
+        if(it -> GetPersonType() == PersonType :: Account)
+        {
+            auto acc = std::dynamic_pointer_cast<Account>(it);
+            if(acc -> getCnp() == cnp)
+            {
+                return it;
+            }
+        }
+    }
+
+    return std :: shared_ptr<Person>();
+}

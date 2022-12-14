@@ -1,4 +1,5 @@
 #include "account.h"
+#include "catalog.h"
 #include <string>
 
 Account :: Account(const std::string &lastName, const std::string &firstName, const std::string &cnp, const std::string &registrationNumber, char sex, const std :: string username, std :: string passwd) :

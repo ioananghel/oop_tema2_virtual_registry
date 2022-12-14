@@ -119,25 +119,37 @@ void Menu ::Start()
                                 std :: string buff_cnp;
                                 std :: cin >> buff_cnp;
 
-                                std :: shared_ptr<Person> pers = Catalog ::findStudentByCNP(buff_cnp);
-                                std :: shared_ptr<Student> stud = std ::dynamic_pointer_cast<Student>(pers);
-
-                                std :: cout << "\nIntroduceti numarul de note si acestea: \n";
-                                fflush(stdin);
-
-                                int n;
-                                std :: vector<int> v;
-
-                                std :: cin >> n;
-
-                                for(int i = 0; i < n; i++)
+                                try
                                 {
-                                    int a;
-                                    std :: cin >> a;
-                                    v.push_back(a);
+                                    std::shared_ptr<Person> pers = Catalog::findStudentByCNP(buff_cnp);
+                                    std::shared_ptr<Student> stud = std::dynamic_pointer_cast<Student>(pers);
+//                                  std :: string buff_cnp = stud ->getCnp();
+//                                  std::cout << "\nstud cnp" << stud->getCnp() << "\n";
+                                    std :: cout << "\nIntroduceti numarul de note si acestea: \n";
+                                    fflush(stdin);
+
+                                    int n;
+                                    std :: vector<int> v;
+
+                                    std :: cin >> n;
+
+                                    for(int i = 0; i < n; i++)
+                                    {
+                                        int a;
+                                        std :: cin >> a;
+                                        v.push_back(a);
+                                    }
+
+                                    stud -> setGrades(v);
+                                }
+                                catch(const NoSuchStudent &err)
+                                {
+                                    std :: cout << err;
+                                    continue;
                                 }
 
-                                stud -> setGrades(v);
+//                                std :: shared_ptr<Person> pers = Catalog ::findStudentByCNP(buff_cnp);
+//                                std :: shared_ptr<Student> stud = std ::dynamic_pointer_cast<Student>(pers);
 
                                 break;
                             }
@@ -148,15 +160,21 @@ void Menu ::Start()
 
                                 std :: string buff_cnp;
                                 std :: cin >> buff_cnp;
-
-                                std :: shared_ptr<Person> pers = Catalog ::findStudentByCNP(buff_cnp);
-                                std :: shared_ptr<Student> stud = std ::dynamic_pointer_cast<Student>(pers);
-
-                                std :: vector<int> v = stud -> getGrades();
-
-                                for(auto it : v)
+                                try
                                 {
-                                    std :: cout << it << " ";
+                                    std::shared_ptr<Person> pers = Catalog::findStudentByCNP(buff_cnp);
+                                    std::shared_ptr<Student> stud = std::dynamic_pointer_cast<Student>(pers);
+
+                                    std::vector<int> v = stud->getGrades();
+
+                                    for (auto it: v) {
+                                        std::cout << it << " ";
+                                    }
+                                }
+                                catch(const NoSuchStudent &err)
+                                {
+                                    std :: cout << err;
+                                    continue;
                                 }
 
                                 break;
@@ -180,7 +198,7 @@ void Menu ::Start()
                         {
                             pers = Catalog::findStudentByCNP(acc->getCnp());
                             std::shared_ptr<Student> stud = std::dynamic_pointer_cast<Student>(pers);
-                            std :: string buff_cnp = stud ->getCnp();
+//                            std :: string buff_cnp = stud ->getCnp();
 //                            std::cout << "\nstud cnp" << stud->getCnp() << "\n";
                             logged_in(stud);
                         }
@@ -224,8 +242,18 @@ void Menu ::Start()
                 std :: getline(std :: cin, buff_passwd);
                 fflush(stdin);
 
-                auto temp_acc = std ::make_shared<Account>(buff_last_name, buff_first_name, buff_cnp, buff_registration_number, buff_sex, buff_user, buff_passwd);
-                Catalog :: AddPerson(temp_acc);
+                std :: shared_ptr<Person> check = Catalog ::findAccountByCNP(buff_cnp);
+                if(check == NULL) {
+                    auto temp_acc = std::make_shared<Account>(buff_last_name, buff_first_name, buff_cnp,
+                                                              buff_registration_number, buff_sex, buff_user,
+                                                              buff_passwd);
+                    Catalog::AddPerson(temp_acc);
+                }
+                else
+                {
+                    std :: cout << "Aceasta persoana are deja un cont inregistrat!";
+                }
+
                 break;
             }
             case 3:

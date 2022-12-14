@@ -7,5 +7,5 @@ void NoSuchStudent :: Print(std :: ostream &os) const
 
 const char *NoSuchStudent ::what() const noexcept
 {
-    return "There is no student matching the description";
+    return "\nThere is no student matching the description\n";
 }
