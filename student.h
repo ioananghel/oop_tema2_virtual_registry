@@ -4,10 +4,13 @@
 #include <vector>
 #include "person.h"
 #include "get_type.h"
+#include "cloning.h"
+#include "assign_id.h"
 
-class Student : public Person
+class Student : public Person, public cloning
 {
 private:
+    std :: string id;
     std :: vector<int> grades;
 
 public:
@@ -23,6 +26,13 @@ public:
     void Print(std::ostream&) const override;
 
     PersonType GetPersonType() const override { return PersonType::Student; }
+
+    std::string getId() const override { return id; }
+
+    virtual Student* clone() const
+    {
+        return (new Student(*this));
+    }
 
     ~Student() override;
 };

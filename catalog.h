@@ -4,14 +4,15 @@
 #include <memory>
 #include "student.h"
 #include "account.h"
-
+///SINGLETON CLASS
 class Catalog
 {
 private:
     static std :: vector <std :: shared_ptr <Person>> registry;
-
+    Catalog(){}
+    Catalog& operator=(const Catalog& rhs) = delete;
 public:
-    Catalog() = delete;
+//    Catalog() = delete;
 
     static void AddPerson(std :: shared_ptr<Person> p);
     static std :: shared_ptr<Person> findStudentByCNP(const std :: string cnp);

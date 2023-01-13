@@ -244,10 +244,9 @@ void Menu ::Start()
 
                 std :: shared_ptr<Person> check = Catalog ::findAccountByCNP(buff_cnp);
                 if(check == NULL) {
-                    auto temp_acc = std::make_shared<Account>(buff_last_name, buff_first_name, buff_cnp,
-                                                              buff_registration_number, buff_sex, buff_user,
-                                                              buff_passwd);
+                    auto temp_acc = std::make_shared<Account>(buff_last_name, buff_first_name, buff_cnp,buff_registration_number, buff_sex, buff_user, buff_passwd);
                     Catalog::AddPerson(temp_acc);
+//                    std :: cout << "\n\n=======\n" << temp_acc.
                 }
                 else
                 {

@@ -33,6 +33,8 @@ public:
 
     virtual PersonType GetPersonType() const = 0;
 
+    virtual std::string getId() const = 0;
+
     virtual ~Person();
 };
 

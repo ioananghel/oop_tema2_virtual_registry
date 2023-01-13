@@ -4,10 +4,13 @@
 #include <string>
 #include "person.h"
 #include "get_type.h"
+#include "cloning.h"
+#include "assign_id.h"
 
 class Account: public Person
 {
 private:
+    std :: string id;
     std :: string username, passwd;
 
 public:
@@ -25,6 +28,13 @@ public:
     void Print(std::ostream&) const override;
 
     PersonType GetPersonType() const override { return PersonType::Account; }
+
+    std::string getId() const override { return username; }
+
+    virtual Account* clone() const
+    {
+        return (new Account(*this));
+    }
 
     ~Account() override;
 };

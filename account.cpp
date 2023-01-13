@@ -1,9 +1,11 @@
 #include "account.h"
-#include "catalog.h"
 #include <string>
 
 Account :: Account(const std::string &lastName, const std::string &firstName, const std::string &cnp, const std::string &registrationNumber, char sex, const std :: string username, std :: string passwd) :
-        Person(lastName, firstName, cnp, registrationNumber, sex), username(username), passwd(passwd) {}
+        Person(lastName, firstName, cnp, registrationNumber, sex), username(username), passwd(passwd)
+{
+    id = "Acc" + ID<int> :: getId();
+}
 
 const std::string &Account::getUsername() const
 {

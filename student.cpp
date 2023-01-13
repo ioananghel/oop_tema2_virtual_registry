@@ -1,13 +1,15 @@
 #include <string>
 #include <vector>
-#include "person.h"
 #include "student.h"
 #include "no_grades.h"
+
 
 Student::Student(const std :: string &lastName, const std :: string &firstName, const std :: string &cnp, const std :: string &registrationNumber, char sex) :
     Person(lastName, firstName, cnp, registrationNumber, sex)
 {
     grades.reserve(4);
+
+    id = "Stud" + ID<float> :: getId();
 }
 
 Student::Student(const Student &rhs) : Person(rhs.getLastName(), rhs.getFirstName(), rhs.getCnp(), rhs.getRegistrationNumber(), rhs.getSex())
